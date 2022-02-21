@@ -19,14 +19,14 @@ function Card({ title, subTitle, image }) {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 15,
-    backgroundColor: "#F8F9F9",
+    backgroundColor: "#F4F6F6",
     marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
   },
   detailContainer: {
-    padding: 10,
+    padding: 8,
   },
   image: {
     width: "40%",
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   subTitle: {
     color: colors.secondary,
     fontWeight: "bold",
+    textAlign: "center",
   },
   title: {
     marginBottom: 5,
