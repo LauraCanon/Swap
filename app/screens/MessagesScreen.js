@@ -9,8 +9,9 @@ import Screen from "../components/Screen";
 const initialMessages = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
+    title: "Holaaaaa como estás, como te ha ido?",
+    description:
+      "Estaba viendo el juego que publicaste y me interesaría poder cambiarlo por Mario Bross",
     image: require("../assets/ProfilePicture.jpeg"),
   },
   {
