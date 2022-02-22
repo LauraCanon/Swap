@@ -1,12 +1,11 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Formik } from "formik";
+import { Image, StyleSheet } from "react-native";
 import * as Yup from "yup";
 
-import AppButton from "../components/AppButton";
-import AppTextInput from "../components/AppTextInput";
-import ErrorMessage from "../components/ErrorMessage";
 import Screen from "../components/Screen";
+import AppFormField from "../components/AppFormField";
+import SubmitButton from "../components/SubmitButton";
+import AppForm from "../components/AppForm";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -17,50 +16,38 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen(props) {
   return (
     <Screen style={styles.container}>
-      <Formik
+      <AppForm
         initialValues={{ name: "", email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-          <>
-            <AppTextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="account"
-              keyboardType="email-address"
-              onBlur={() => setFieldTouched("name")}
-              onChangeText={handleChange("name")}
-              placeholder="Name"
-              textContentType="emailAddress"
-            />
-            <ErrorMessage error={errors.name} visible={touched.name} />
-            <AppTextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="email"
-              keyboardType="email-address"
-              onBlur={() => setFieldTouched("email")}
-              onChangeText={handleChange("email")}
-              placeholder="Email"
-              textContentType="emailAddress"
-            />
-            <ErrorMessage error={errors.email} visible={touched.email} />
-            <AppTextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              onBlur={() => setFieldTouched("password")}
-              onChangeText={handleChange("password")}
-              placeholder="Password"
-              textContentType="password"
-              secureTextEntry
-            />
-            <ErrorMessage error={errors.password} visible={touched.password} />
-            <AppButton tittle="Register" onPress={handleSubmit} />
-          </>
-        )}
-      </Formik>
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="account"
+          name="name"
+          placeholder="Name"
+        />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="email"
+          keyboardType="email-address"
+          name="email"
+          placeholder="Email"
+          textContentType="emailAddress"
+        />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="lock"
+          name="password"
+          placeholder="Password"
+          textContentType="password"
+          secureTextEntry
+        />
+        <SubmitButton title="Login" />
+      </AppForm>
     </Screen>
   );
 }
@@ -68,7 +55,7 @@ function RegisterScreen(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    marginTop: 50,
+    marginTop: 20,
   },
 });
 
