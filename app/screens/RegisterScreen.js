@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -9,22 +9,32 @@ import ErrorMessage from "../components/ErrorMessage";
 import Screen from "../components/Screen";
 
 const validationSchema = Yup.object().shape({
+  name: Yup.string().required().label("Name"),
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(6).label("Password"),
 });
 
-function LoginScreen(props) {
+function RegisterScreen(props) {
   return (
     <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/coin.jpeg")} />
-
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: "", email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
           <>
+            <AppTextInput
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="account"
+              keyboardType="email-address"
+              onBlur={() => setFieldTouched("name")}
+              onChangeText={handleChange("name")}
+              placeholder="Name"
+              textContentType="emailAddress"
+            />
+            <ErrorMessage error={errors.name} visible={touched.name} />
             <AppTextInput
               autoCapitalize="none"
               autoCorrect={false}
@@ -47,7 +57,7 @@ function LoginScreen(props) {
               secureTextEntry
             />
             <ErrorMessage error={errors.password} visible={touched.password} />
-            <AppButton tittle="Login" onPress={handleSubmit} />
+            <AppButton tittle="Register" onPress={handleSubmit} />
           </>
         )}
       </Formik>
@@ -58,14 +68,8 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-  },
-  logo: {
-    width: 70,
-    height: 70,
-    alignSelf: "center",
     marginTop: 50,
-    marginBottom: 50,
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;
