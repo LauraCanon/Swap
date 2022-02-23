@@ -2,17 +2,19 @@ import React from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import AppButton from "../components/AppButton";
 
-import colors from "../config/colors";
-
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       style={styles.background}
       source={require("../assets/mario.jpeg")}
     >
       <View style={styles.buttonsContainer}>
-        <AppButton tittle="Login" />
-        <AppButton tittle="Register" color="secondary" />
+        <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
+        <AppButton
+          title="Register"
+          color="secondary"
+          onPress={() => navigation.navigate("Register")}
+        />
       </View>
     </ImageBackground>
   );

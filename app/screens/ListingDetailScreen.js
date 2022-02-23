@@ -4,40 +4,44 @@ import AppText from "../components/AppText";
 import ListItem from "../components/ListItem";
 
 import colors from "../config/colors";
+import Screen from "../components/Screen";
 
-function ListingDetailScreen(props) {
+function ListingDetailScreen({ route }) {
+  const listing = route.params;
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require("../assets/Zelda2.jpeg")} />
-      <View style={styles.detailContainer}>
-        <AppText style={styles.title}>
-          Legend Of Zelda - Breath of the Wild 2
-        </AppText>
-        <AppText style={styles.subTitle}>Nintendo Switch</AppText>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require("../assets/ProfilePicture.jpeg")}
-            title="Laura Canón"
-            subTitle="3 Listings"
-          />
-        </View>
+    <Screen>
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={listing.image} />
       </View>
-    </View>
+      <View style={styles.detailContainer}>
+        <AppText style={styles.title}>{listing.title}</AppText>
+        <AppText style={styles.subTitle}>{listing.console}</AppText>
+      </View>
+      <View style={styles.userContainer}>
+        <ListItem
+          image={require("../assets/ProfilePicture.jpeg")}
+          title="Laura Canón"
+          subTitle="3 Listings"
+        />
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  detailContainer: {
+    padding: 10,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 30,
-  },
-  detailContainer: {
-    padding: 20,
   },
   image: {
     width: "60%",
     height: 300,
+  },
+  imageContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   subTitle: {
     color: colors.secondary,
@@ -50,7 +54,8 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   userContainer: {
-    marginVertical: 30,
+    padding: 15,
+    marginVertical: 10,
   },
 });
 
