@@ -1,4 +1,4 @@
-import { Switch, Text, TextInput, View } from "react-native";
+import { Button, Image, Switch, Text, TextInput, View } from "react-native";
 import AppButton from "./app/components/AppButton";
 import Card from "./app/components/Card";
 import ListingDetailScreen from "./app/screens/ListingDetailScreen";
@@ -15,7 +15,11 @@ import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
+import { useEffect, useState } from "react";
+import * as ImagePicker from "expo-image-picker";
+import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
 
 export default function App() {
-  return <ListingEditScreen></ListingEditScreen>;
+  return <ListingEditScreen />;
 }
