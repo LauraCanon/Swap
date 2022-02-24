@@ -12,7 +12,7 @@ function ListingDetailScreen({ route }) {
   return (
     <Screen>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={listing.image} />
+        <Image style={styles.image} source={listing.images[0]} />
       </View>
       <View style={styles.detailContainer}>
         <AppText style={styles.title}>{listing.title}</AppText>

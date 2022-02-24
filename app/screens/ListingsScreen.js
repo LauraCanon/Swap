@@ -1,34 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
+import listingsApi from "../api/listings";
 import Card from "../components/Card";
 import Screen from "../components/Screen";
-
-const listings = [
-  {
-    id: 1,
-    title: "Legend of Zelda",
-    console: "Nintendo Switch",
-    image: require("../assets/Zelda2.jpeg"),
-  },
-  {
-    id: 2,
-    title: "Call of Duty - Black Ops",
-    console: "Play Station",
-    image: require("../assets/callofduty.jpg"),
-  },
-];
+import useApi from "../hooks/useApi";
 
 function ListingsScreen({ navigation }) {
+  const getListingsApi = useApi(listingsApi.getListings);
+
+  useEffect(() => {
+    getListingsApi.request();
+  }, []);
+
   return (
     <Screen style={styles.screen}>
       <FlatList
-        data={listings}
+        data={getListingsApi.data}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
           <Card
             title={item.title}
             subTitle={item.console}
-            image={item.image}
+            imageUrl={item.images[0].url}
             onPress={() => navigation.navigate("ListingDetails", item)}
           />
         )}
