@@ -16,6 +16,7 @@ import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import { useEffect, useState } from "react";
+import jwtDecode from "jwt-decode";
 import * as ImagePicker from "expo-image-picker";
 import ImageInput from "./app/components/ImageInput";
 import ImageInputList from "./app/components/ImageInputList";
@@ -25,11 +26,22 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import { LogBox } from "react-native";
 import AuthContext from "./app/auth/context";
+import authStorage from "./app/auth/storage";
 
 console.LogBox = true;
 
 export default function App() {
   const [user, setUser] = useState();
+
+  const restoreToken = async () => {
+    const token = await authStorage.getToken();
+    if (!token) return;
+    setUser(jwtDecode(token));
+  };
+
+  useEffect(() => {
+    restoreToken();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
