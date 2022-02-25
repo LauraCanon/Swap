@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import listingsApi from "../api/listings";
 import Card from "../components/Card";
 import Screen from "../components/Screen";
 import useApi from "../hooks/useApi";
+import routes from "../navigation/routes";
 
 function ListingsScreen({ navigation }) {
   const getListingsApi = useApi(listingsApi.getListings);
@@ -22,7 +23,7 @@ function ListingsScreen({ navigation }) {
             title={item.title}
             subTitle={item.console}
             imageUrl={item.images[0].url}
-            onPress={() => navigation.navigate("ListingDetails", item)}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
       />

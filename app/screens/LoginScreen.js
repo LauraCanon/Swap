@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import * as Yup from "yup";
-import jwtDecode from "jwt-decode";
 
 import Screen from "../components/Screen";
 import AppFormField from "../components/AppFormField";
@@ -9,8 +8,7 @@ import SubmitButton from "../components/SubmitButton";
 import AppForm from "../components/AppForm";
 import ErrorMessage from "../components/ErrorMessage";
 import authApi from "../api/auth";
-import AuthContext from "../auth/context";
-import authStorage from "../auth/storage";
+import useAuth from "../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -19,7 +17,7 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen(props) {
   const [loginFailed, setLoginFailed] = useState(false);
-  const authContext = useContext(AuthContext);
+  const auth = useAuth();
 
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi.login(email, password);
@@ -27,14 +25,12 @@ function LoginScreen(props) {
       return setLoginFailed(true);
     }
     setLoginFailed(false);
-    const user = jwtDecode(result.data);
-    authContext.setUser(user);
-    authStorage.storeToken(result.data);
+    auth.logIn(result.data);
   };
 
   return (
     <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/game.jpeg")} />
+      {/* <Image style={styles.logo} source={require("../assets/game.jpeg")} /> */}
 
       <AppForm
         initialValues={{ email: "", password: "" }}
@@ -72,6 +68,7 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    marginTop: 30,
   },
   logo: {
     width: 100,

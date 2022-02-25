@@ -12,6 +12,7 @@ import listingsApi from "../api/listings";
 import Screen from "../components/Screen";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import UploadScreen from "./UploadScreen";
+import AppText from "../components/AppText";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -54,12 +55,16 @@ function ListingEditScreen() {
 
     if (!result.ok) {
       setUploadVisible(false);
+      return alert("Could not save the listing");
     }
     resetForm();
   };
 
   return (
     <Screen style={styles.container}>
+      <AppText title="New Game" style={styles.title}>
+        {"New Listing"}
+      </AppText>
       <UploadScreen
         onDone={() => setUploadVisible(false)}
         progress={progress}
@@ -68,6 +73,7 @@ function ListingEditScreen() {
       <AppForm
         initialValues={{
           title: "",
+          console,
           description: "",
           category: null,
           images: [],
@@ -101,6 +107,12 @@ function ListingEditScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginLeft: 126,
   },
 });
 export default ListingEditScreen;

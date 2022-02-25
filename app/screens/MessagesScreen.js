@@ -9,16 +9,21 @@ import Screen from "../components/Screen";
 const initialMessages = [
   {
     id: 1,
-    title: "Holaaaaa como estás, como te ha ido?",
-    description:
-      "Estaba viendo el juego que publicaste y me interesaría poder cambiarlo por Mario Bross",
-    image: require("../assets/ProfilePicture.jpeg"),
+    title: "John Nino",
+    description: "Hey! Is this game still available?",
+    image: require("../assets/john.jpg"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
-    image: require("../assets/ProfilePicture.jpeg"),
+    title: "Paola Canon",
+    description: "Hello, I'm interested in this game. Can we talk to swap it?",
+    image: require("../assets/paola.jpg"),
+  },
+  {
+    id: 3,
+    title: "Silvia Pedroza",
+    description: "This is a nice game, can we talk?",
+    image: require("../assets/silvia.jpg"),
   },
 ];
 
@@ -50,14 +55,14 @@ function MessagesScreen() {
         ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
-          [
+          setMessages([
             {
               id: 2,
               title: "T2",
               description: "D2",
               image: require("../assets/ProfilePicture.jpeg"),
             },
-          ];
+          ]);
         }}
       />
     </Screen>
