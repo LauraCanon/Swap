@@ -17,13 +17,14 @@ import AppText from "../components/AppText";
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   description: Yup.string().label("Description"),
+  console: Yup.string().label("Console"),
   category: Yup.object().required().nullable().label("Category"),
   images: Yup.array().min(1, "Please select at least one image."),
 });
 
 const categories = [
   {
-    label: "Nintendo Switch",
+    label: "Nintendo",
     value: 1,
     backgroundColor: "#EC7063",
     icon: "nintendo-switch",
@@ -73,8 +74,8 @@ function ListingEditScreen() {
       <AppForm
         initialValues={{
           title: "",
-          console,
           description: "",
+          console: "",
           category: null,
           images: [],
         }}
@@ -83,6 +84,7 @@ function ListingEditScreen() {
       >
         <FormImagePicker name="images" />
         <AppFormField maxLength={255} name="title" placeholder="Title" />
+        <AppFormField maxLength={255} name="console" placeholder="Console" />
         <AppFormPicker
           items={categories}
           icon="gamepad-square-outline"

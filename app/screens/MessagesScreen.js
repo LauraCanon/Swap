@@ -9,13 +9,14 @@ import Screen from "../components/Screen";
 const initialMessages = [
   {
     id: 1,
-    title: "John Nino",
-    description: "Hey! Is this game still available?",
+    title: "John Niño",
+    description:
+      "Hey! Is this game still available? I have a few games to swap if you're interested",
     image: require("../assets/john.jpg"),
   },
   {
     id: 2,
-    title: "Paola Canon",
+    title: "Paola Cañon",
     description: "Hello, I'm interested in this game. Can we talk to swap it?",
     image: require("../assets/paola.jpg"),
   },
@@ -27,13 +28,17 @@ const initialMessages = [
   },
 ];
 
-function MessagesScreen() {
+function MessagesScreen({ navigation }) {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message) => {
     const newMessages = messages.filter((m) => m.id !== message.id);
     setMessages(newMessages);
+  };
+
+  const handleSelect = (item) => {
+    navigation.navigate("My Messages", item);
   };
 
   return (
@@ -46,7 +51,7 @@ function MessagesScreen() {
             title={item.title}
             subTitle={item.description}
             image={item.image}
-            onPress={() => console.log("Message selected", item)}
+            onPress={() => handleSelect(item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
             )}
@@ -57,10 +62,18 @@ function MessagesScreen() {
         onRefresh={() => {
           setMessages([
             {
+              id: 1,
+              title: "John Nino",
+              description:
+                "Hey! Is this game still available? I have a few games to swap if you're interested",
+              image: require("../assets/john.jpg"),
+            },
+            {
               id: 2,
-              title: "T2",
-              description: "D2",
-              image: require("../assets/ProfilePicture.jpeg"),
+              title: "Paola Canon",
+              description:
+                "Hello, I'm interested in this game. Can we talk to swap it?",
+              image: require("../assets/paola.jpg"),
             },
           ]);
         }}

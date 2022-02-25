@@ -2,7 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountScreen from "../screens/AccountScreen";
 import MessagesScreen from "../screens/MessagesScreen";
-import ListingEditScreen from "../screens/ListingEditScreen";
+import MyListings from "../screens/MyListings";
+import MessageDetail from "../screens/MessageDetail";
 
 const Stack = createStackNavigator();
 
@@ -10,6 +11,8 @@ const AccountNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen name="Account" component={AccountScreen} />
     <Stack.Screen name="Messages" component={MessagesScreen} />
+    <Stack.Screen name="My Listings" component={MyListings} />
+    <Stack.Screen name="My Messages" component={MessageDetail} />
   </Stack.Navigator>
 );
 

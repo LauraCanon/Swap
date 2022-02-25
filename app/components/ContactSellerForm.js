@@ -8,6 +8,10 @@ import AppFormField from "./AppFormField";
 import SubmitButton from "./SubmitButton";
 import messagesApi from "../api/messages";
 
+const validationSchema = Yup.object().shape({
+  message: Yup.string().required().min(1).label("Message"),
+});
+
 function ContactSellerForm({ listing }) {
   const handleSubmit = async ({ message }, { resetForm }) => {
     Keyboard.dismiss();
@@ -56,9 +60,5 @@ function ContactSellerForm({ listing }) {
     </AppForm>
   );
 }
-
-const validationSchema = Yup.object().shape({
-  message: Yup.string().required().min(1).label("Message"),
-});
 
 export default ContactSellerForm;
