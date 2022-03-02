@@ -10,6 +10,7 @@ function ListItem({
   title,
   subTitle,
   image,
+  url,
   IconComponent,
   onPress,
   renderRightActions,
@@ -20,6 +21,7 @@ function ListItem({
         <View style={styles.container}>
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
+          {url && <Image style={styles.image} source={{ uri: url }} />}
           <View style={styles.detailContainer}>
             <AppText style={styles.title} numberOfLines={1}>
               {title}
